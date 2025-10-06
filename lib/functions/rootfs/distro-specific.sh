@@ -51,6 +51,15 @@ function install_distribution_specific() {
 	HandleHibernateKey=ignore
 	HandlePowerKey=ignore
 	EOF
+	# Tell systemd there is NO suspend/hibernate at all
+	mkdir -p "${SDCARD}/etc/systemd/sleep.conf.d"
+	cat <<- EOF > "${SDCARD}/etc/systemd/sleep.conf.d/00-disable.conf"
+	[Sleep]
+	AllowSuspend=no
+	AllowHibernation=no
+	AllowHybridSleep=no
+	AllowSuspendThenHibernate=no
+	EOF
 	fi
 
 	# install our base-files package (this replaces the original from Debian/Ubuntu)

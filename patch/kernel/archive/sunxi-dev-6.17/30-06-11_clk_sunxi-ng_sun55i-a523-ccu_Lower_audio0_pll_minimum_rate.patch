@@ -1,0 +1,29 @@
+While the user manual states that the PLL's rate should be between 180
+MHz and 3 GHz in the register defninition section, it also says the
+actual operating frequency is 22.5792*4 MHz in the PLL features table.
+
+22.5792*4 MHz is one of the actual clock rates that we want and is
+is available in the SDM table. Lower the minimum clock rate to 90 MHz
+so that both rates in the SDM table can be used.
+
+Fixes: 7cae1e2b5544 ("clk: sunxi-ng: Add support for the A523/T527 CCU PLLs")
+Signed-off-by: Chen-Yu Tsai <wens@kernel.org>
+---
+ drivers/clk/sunxi-ng/ccu-sun55i-a523.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/clk/sunxi-ng/ccu-sun55i-a523.c b/drivers/clk/sunxi-ng/ccu-sun55i-a523.c
+index acb532f8361b..20dad06b37ca 100644
+--- a/drivers/clk/sunxi-ng/ccu-sun55i-a523.c
++++ b/drivers/clk/sunxi-ng/ccu-sun55i-a523.c
+@@ -300,7 +300,7 @@ static struct ccu_nm pll_audio0_4x_clk = {
+ 	.m		= _SUNXI_CCU_DIV(16, 6),
+ 	.sdm		= _SUNXI_CCU_SDM(pll_audio0_sdm_table, BIT(24),
+ 					 0x178, BIT(31)),
+-	.min_rate	= 180000000U,
++	.min_rate	= 90000000U,
+ 	.max_rate	= 3000000000U,
+ 	.common		= {
+ 		.reg		= 0x078,
+-- 
+2.47.3

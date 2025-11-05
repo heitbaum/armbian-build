@@ -1,0 +1,15 @@
+diff --git a/arch/arm64/boot/dts/allwinner/sun55i-a523.dtsi b/arch/arm64/boot/dts/allwinner/sun55i-a523.dtsi
+index d00da1cd744e96..7b36c47a3a1399 100644
+--- a/arch/arm64/boot/dts/allwinner/sun55i-a523.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun55i-a523.dtsi
+@@ -626,6 +626,8 @@ r_ccu: clock-controller@7010000 {
+ 				      "pll-audio";
+ 			#clock-cells = <1>;
+ 			#reset-cells = <1>;
++			assigned-clocks = <&r_ccu CLK_R_AHB>, <&r_ccu CLK_R_APB0>;
++			assigned-clock-rates = <200000000>, <100000000>;
+ 		};
+ 
+ 		nmi_intc: interrupt-controller@7010320 {
+-- 
+cgit 1.2.3-korg
